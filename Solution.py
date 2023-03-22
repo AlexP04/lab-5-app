@@ -36,6 +36,7 @@ class Solution:
         self.aprior_probabilities =  self.aprior_probabilities/np.sum(self.weights)
         
         if with_test:
+            self.aprior_probabilities = self.new_aprior_probabilities.copy()
             self.aprior_probabilities[event] = 0.99999999
             
         # ймовірності протилежних подій
