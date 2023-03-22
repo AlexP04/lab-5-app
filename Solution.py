@@ -13,6 +13,7 @@ class Solution:
         self.l2 = 0
         self.l3 = 0
         self.l4 = 0
+        self.first = True
         
         #кількість експертів
         self.m = params['m']
@@ -36,7 +37,7 @@ class Solution:
         self.aprior_probabilities =  self.aprior_probabilities/np.sum(self.weights)
         
         if with_test:
-            self.aprior_probabilities = self.new_aprior_probabilities.copy()
+            self.aprior_probabilities =  self.aposterior_prob.copy()
             self.aprior_probabilities[event] = 0.99999999
             
         # ймовірності протилежних подій
@@ -141,6 +142,9 @@ class Solution:
                 print("Probabilities for step №"+str(i)+" : " + str(self.probabilities)+ ";")
                 
         self.new_aprior_probabilities = self.probabilities.copy()
+        if first:
+            self.aposterior_prob = self.probabilities.copy()
+            first = False
     
     def __process_sigmas(self):
         self.sigmas = (self.m*np.sum(self.estimations**2, axis = 1) - np.sum(self.estimations, axis = 1)**2)
