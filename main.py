@@ -65,10 +65,9 @@ if col2.button('Run', key='run'):
             res_cols[i+2].write(col_names[i+2])
             res_cols[i+2].write(values[i])
 
-        test_res_cols = st.columns(4)
+        test_res_cols = st.columns(3)
         
         test_col_names = [
-            'Aprior estimated $$p_i$$:',
             'Test $$p_i$$',
             'Final $$p_i$$',
             'Residual'   
@@ -79,9 +78,9 @@ if col2.button('Run', key='run'):
         #tests (for one of the events == 1):
         for i in range(estimations.shape[0]):
             new_probs = solution.test_prob_check(i, vocab = False, num_iterations = num_iterations)
-            dataframes = [ pd.DataFrame(aprior_probs, columns = ["P"]), pd.DataFrame(solution.aprior_probabilities, columns = ["P"]),  pd.DataFrame(new_probs, columns = ["P"]),  pd.DataFrame(new_probs - aprior_probs, columns = ["Residual"])]
+            dataframes = [ pd.DataFrame(solution.aprior_probabilities, columns = ["P"]),  pd.DataFrame(new_probs, columns = ["P"]),  pd.DataFrame(new_probs - aprior_probs, columns = ["Residual"])]
             
-            for j in range(4):
+            for j in range(3):
                 
                 test_res_cols[j].write(test_col_names[j])
                 test_res_cols[j].dataframe(
