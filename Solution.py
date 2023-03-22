@@ -142,9 +142,9 @@ class Solution:
                 print("Probabilities for step №"+str(i)+" : " + str(self.probabilities)+ ";")
                 
         self.new_aprior_probabilities = self.probabilities.copy()
-        if first:
+        if self.first:
             self.aposterior_prob = self.probabilities.copy()
-            first = False
+            self.first = False
     
     def __process_sigmas(self):
         self.sigmas = (self.m*np.sum(self.estimations**2, axis = 1) - np.sum(self.estimations, axis = 1)**2)
